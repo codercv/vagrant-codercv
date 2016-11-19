@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Use single quotes instead of double quotes to make it work with special-character passwords
-PASSWORD='12345678'
+PASSWORD='root'
 PROJECTFOLDER='myproject'
 
 # create project folder
@@ -13,7 +13,7 @@ sudo apt-get -y upgrade
 
 # install apache 2.5 and php 5.5
 sudo apt-get install -y apache2
-sudo apt-get install -y php5
+sudo apt-get install -y php5 php5-curl php5-crypt
 
 # install mysql and give password to installer
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $PASSWORD"
@@ -55,3 +55,9 @@ sudo apt-get -y install git
 # install Composer
 curl -s https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer
+
+#install mc
+sudo apt-get -y install mc
+
+#install htop
+sudo apt-get -y install htop
