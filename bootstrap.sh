@@ -8,14 +8,14 @@ PROJECTFOLDER='myproject'
 sudo mkdir "/var/www/html/${PROJECTFOLDER}"
 
 # update / upgrade
+sudo add-apt-repository ppa:ondrej/php -y
 sudo apt-get update
-sudo add-apt-repository ppa:ondrej/php
 sudo apt-get -y upgrade
 
 # install apache 2.5 and php 5.5
 sudo apt-get install -y apache2
 sudo apt-get -y install libapache2-mod-php5.6
-sudo apt-get -y install php5.6-mcrypt php5.6-curl php5.6-cli php5.6-mbstring php5.6-mysql php5.6-gd php5.6-intl php5.6-xsl php5.6-zip
+sudo apt-get -y install php5.6-mcrypt php5.6-curl php5.6-cli php5.6-mbstring php5.6-mysql php5.6-gd php5.6-intl php5.6-xsl php5.6-zip php5.6-apcu
 
 # install mysql and give password to installer
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $PASSWORD"
@@ -46,6 +46,15 @@ echo "${VHOST}" > /etc/apache2/sites-available/000-default.conf
 
 # enable mod_rewrite
 sudo a2enmod rewrite
+
+#FIX AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 10.0.2.15. Set the 'ServerName' directive globally to suppress this message
+echo "ServerName localhost" | sudo tee /etc/apache2/conf-available/fqdn.conf
+sudo a2enconf fqdn
+
+#SWITCH TO PHP5.6
+sudo a2dismod php7.0 
+sudo a2enmod php5.6
+sudo update-alternatives --set php /usr/bin/php5.6
 
 # restart apache
 service apache2 restart
