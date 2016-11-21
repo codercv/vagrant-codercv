@@ -15,7 +15,9 @@ sudo apt-get -y upgrade
 # install apache 2.5 and php 5.5
 sudo apt-get install -y apache2
 sudo apt-get -y install libapache2-mod-php5.6
-sudo apt-get -y install php5.6-mcrypt php5.6-curl php5.6-cli php5.6-mbstring php5.6-mysql php5.6-gd php5.6-intl php5.6-xsl php5.6-zip php5.6-apcu
+sudo apt-get -y install php5.6-mcrypt php5.6-curl php5.6-cli php5.6-mbstring php5.6-mysql php5.6-gd php5.6-intl php5.6-xsl php5.6-zip php5.6-apcu php-mbstring php7.0-mbstring php-gettext
+#phpmyadmin need this
+sudo apt-get -y install php-mbstring php7.0-mbstring php-gettext
 
 # install mysql and give password to installer
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $PASSWORD"
@@ -52,6 +54,7 @@ echo "ServerName localhost" | sudo tee /etc/apache2/conf-available/fqdn.conf
 sudo a2enconf fqdn
 
 #SWITCH TO PHP5.6
+sudo a2dismod php5
 sudo a2dismod php7.0 
 sudo a2enmod php5.6
 sudo update-alternatives --set php /usr/bin/php5.6
