@@ -4,8 +4,12 @@
 PASSWORD='root'
 PROJECTFOLDER='myproject'
 
+#Set timezone
+sudo timedatectl set-timezone Europe/Kiev
+
 # create project folder
-sudo mkdir "/var/www/html/${PROJECTFOLDER}"
+sudo mkdir -p "/var/www/html/${PROJECTFOLDER}"
+echo "<?php echo phpinfo();?>" > "/var/www/html/${PROJECTFOLDER}/index.php"
 
 # update / upgrade
 sudo add-apt-repository ppa:ondrej/php -y
