@@ -30,6 +30,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
  #	:linux__nfs_options => ['rw','no_subtree_check','all_squash','async']
 
   # vagrant plugin install vagrant-bindfs
+  # These values are the default options 
+  config.bindfs.default_options = {
+    force_user:   'vagrant',
+    force_group:  'www-data',
+    perms:        'u=rwX:g=rwD:o=rD'
+  }
   # Basic usage
   config.bindfs.bind_folder "/mnt/Projects", "/var/www/html"
 
