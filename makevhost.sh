@@ -106,8 +106,9 @@ DocumentRoot $rootdir
     AllowOverride All
 </Directory>
 ErrorLog /var/log/apache2/$hostname"_error.log"
-LogLevel error
-CustomLog /var/log/apache2/$hostname"_access.log" custom
+LogLevel debug
+LogFormat \"%h %l %u %t \\"%r\\" %>s %b \\"%{Referer}i\\" \\"%{User-agent}i\\"\" combined
+CustomLog /var/log/apache2/$hostname"_access.log" combined
 </VirtualHost>" > $vhroot/$hostname".conf"
 then
         echo "ERROR: the virtual host could not be added."

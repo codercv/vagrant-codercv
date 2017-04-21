@@ -18,6 +18,8 @@ sudo apt-get -y upgrade
 
 # install apache 2.5 and php 5.5
 sudo apt-get install -y apache2
+sudo apt-get install libapache2-mod-php7.0
+sudo apt-get -y install php7.0-mcrypt php7.0-curl php7.0-cli php7.0-mbstring php7.0-mysql php7.0-gd php7.0-intl php7.0-xsl php7.0-zip php7.0-apcu php-mbstring php7.0-mbstring php-gettext php7.0-soap php7.0-dev
 sudo apt-get -y install libapache2-mod-php5.6
 sudo apt-get -y install php5.6-mcrypt php5.6-curl php5.6-cli php5.6-mbstring php5.6-mysql php5.6-gd php5.6-intl php5.6-xsl php5.6-zip php5.6-apcu php-mbstring php7.0-mbstring php-gettext php5.6-soap php5.6-dev
 #phpmyadmin need this
