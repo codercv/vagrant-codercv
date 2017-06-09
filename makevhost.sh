@@ -134,7 +134,7 @@ then
 else
     echo ""$rootdir"/phpinfo.php created."
 fi
-if ! echo "$hostname \r\n<br> $rootdir \r\n <br> <?php echo phpinfo();?>" > $rootdir/index.php
+if ! echo "$hostname \r\n<br> $rootdir \r\n <br> <?php echo phpinfo();?>" > $rootdir/phpinfo.php
 then
     echo "ERROR: Not able to write in file "$rootdir"/phpinfo.php. Please check permissions."
 else
