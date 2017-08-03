@@ -106,7 +106,7 @@ DocumentRoot $rootdir
     AllowOverride All
 </Directory>
 ErrorLog /var/log/apache2/$hostname"_error.log"
-LogLevel debug
+LogLevel error
 LogFormat \"%h %l %u %t \\"%r\\" %>s %b \\"%{Referer}i\\" \\"%{User-agent}i\\"\" combined
 CustomLog /var/log/apache2/$hostname"_access.log" combined
 </VirtualHost>" > $vhroot/$hostname".conf"
@@ -128,20 +128,20 @@ chown www-data:vagrant -R $rootdir
 chmod 664 -R $rootdir
 find $rootdir -type d -exec chmod 775 {} \;
  
-if ! touch $rootdir/phpinfo.php
+if ! touch $rootdir/index.php
 then
-    echo "ERROR: "$rootdir"/phpinfo.php could not be created."
+    echo "ERROR: "$rootdir"/index.php could not be created."
 else
-    echo ""$rootdir"/phpinfo.php created."
+    echo ""$rootdir"/index.php created."
 fi
-if ! echo "$hostname \r\n<br> $rootdir \r\n <br> <?php echo phpinfo();?>" > $rootdir/phpinfo.php
+if ! echo "$hostname \r\n<br> $rootdir \r\n <br> <?php echo phpinfo();?>" > $rootdir/index.php
 then
-    echo "ERROR: Not able to write in file "$rootdir"/phpinfo.php. Please check permissions."
+    echo "ERROR: Not able to write in file "$rootdir"/index.php. Please check permissions."
 else
-    echo "Added content to "$rootdir"/phpinfo.php."
+    echo "Added content to "$rootdir"/index.php."
 fi
  
 # show the finished message
 echo "Complete! The new virtual host has been created.
-To check the functionality browse http://"$hostname"/phpinfo.php
+To check the functionality browse http://"$hostname"/index.php
 Document root is "$vhroot"/"$hostname

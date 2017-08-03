@@ -18,23 +18,23 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Virtualbox-specific configuration
   config.vm.provider "virtualbox" do |v|
-    v.memory = 1024
+    v.memory = 2048
     v.cpus = 2
   end
+
+  config.vm.synced_folder "/home/codercv/Projects", "/var/www/html", disabled: true
 
   # Share an additional folder to the guest VM. The first argument is the path on the host to the actual folder.
   # The second argument is the path on the guest to mount the folder.
   # config.vm.synced_folder "/home/codercv/Projects", "/var/www/html", type: :nfs
-  config.vm.synced_folder "/home/codercv/Projects", "/mnt/Projects", type: :nfs
- # 	:nfs => true,
- #	:linux__nfs_options => ['rw','no_subtree_check','all_squash','async']
+  config.vm.synced_folder "/home/codercv/Projects", "/mnt/Projects", type:"nfs", mount_options: ['rw','vers=3','tcp','fsc']
 
   # vagrant plugin install vagrant-bindfs
   # These values are the default options 
   config.bindfs.default_options = {
-    force_user:   'vagrant',
+    force_user:   'ubuntu',
     force_group:  'www-data',
-    perms:        'u=rwX:g=rwD:o=rD'
+    perms:        'u=rwX:g=rwX:o=rwX'
   }
   # Basic usage
   config.bindfs.bind_folder "/mnt/Projects", "/var/www/html"
